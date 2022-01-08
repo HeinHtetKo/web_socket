@@ -105,6 +105,10 @@
         socket.emit("chat", data);
       });
 
+      message.addEventListener("keypress", () => {
+        socket.emit("typing", name.value);
+      });
+
       //receive data
       socket.on("chat", (data) => {
         output.innerHTML += `<p><strong>${data.name}</strong> : ${data.message}</p>`;
