@@ -96,6 +96,7 @@
       let message = document.getElementById("message");
       let name = document.getElementById("name");
       let send = document.getElementById("send");
+      let feedback = document.getElementById("feedback");
 
       send.addEventListener("click", () => {
         data = {
@@ -112,8 +113,16 @@
       //receive data
       socket.on("chat", (data) => {
         output.innerHTML += `<p><strong>${data.name}</strong> : ${data.message}</p>`;
-        name.value = "";
+        // name.value = "";
         message.value = "";
+        feedback.innerHTML = "";
+      });
+      //display data
+      socket.on("typing", (name) => {
+        feedback.innerHTML = `<p><em>${name}</em> is typing....</p>`;
+        setTimeout(() => {
+          feedback.innerHTML = "";
+        }, 3000);
       });
     </script>
   </body>
